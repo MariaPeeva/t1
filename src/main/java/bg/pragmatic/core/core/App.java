@@ -17,7 +17,20 @@ public class App {
 	private AdminDashboard adminDashboard;
 	private AdminCategories adminCategories;
 
+	public void startBrowser(String pageToOpen) {
+		//initialization of the webdriver instance
+		String driverPath = null;
+		driverPath = Paths.get("chromedriver.exe").toAbsolutePath().toString();
+		System.out.println("The taken driver path is: " + driverPath);
 
+		System.setProperty("webdriver.chrome.driver", driverPath);
+		driver = new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
+
+		//open the desired page
+		driver.get(pageToOpen);
+	}
 	// LAZY Instances
 	public AdminLogin adminLogin() {
 		if (adminLogin == null) {
